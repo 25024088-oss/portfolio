@@ -461,6 +461,44 @@
     .lessons-grid { grid-template-columns: 1fr; }
     .tool-grid { grid-template-columns: 1fr; }
   }
+  /* ============================================================
+     Cấu hình tối ưu riêng cho việc xuất file PDF / In ấn
+     ============================================================ */
+  @media print {
+    /* 1. Ẩn hoàn toàn thanh menu điều hướng vì file PDF không cần click chuyển trang */
+    nav, #main-nav, .nav-links, .nav-back { 
+      display: none !important; 
+    }
+
+    /* 2. Ẩn tất cả các nút bấm hành động (CTA, Xem chi tiết...) */
+    button, .hero-cta, .btn-detail { 
+      display: none !important; 
+    }
+
+    /* 3. Chống ngắt trang lỗi: Giữ tiêu đề và nội dung đi liền nhau, tránh để lại khoảng trắng uổng phí */
+    .about-grid, .projects-grid, .reflect-grid, .principles-grid, .summary-box {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    
+    /* Không cho phép một thẻ bài tập nhỏ bị chặt đôi làm hai trang */
+    .project-card, .reflect-card, .principle-card {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Giữ tiêu đề lớn luôn đi kèm với nội dung phía sau nó */
+    h2.section-title, .section-label {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    /* 4. Giữ nguyên màu sắc background, thanh tiến độ và hộp highlight khi xuất PDF */
+    * { 
+      -webkit-print-color-adjust: exact !important; 
+      print-color-adjust: exact !important; 
+    }
+  }
 </style>
 </head>
 <body>
