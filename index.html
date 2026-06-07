@@ -464,36 +464,43 @@
   /* ============================================================
      Cấu hình tối ưu riêng cho việc xuất file PDF / In ấn
      ============================================================ */
+ /* ============================================================
+     Cấu hình tối ưu riêng cho việc xuất file PDF / In ấn (BẢN CHUẨN)
+     ============================================================ */
   @media print {
-    /* 1. Ẩn hoàn toàn thanh menu điều hướng vì file PDF không cần click chuyển trang */
-    nav, #main-nav, .nav-links, .nav-back { 
+    /* 1. Ẩn menu và các nút bấm */
+    nav, #main-nav, .nav-links, .nav-back, button, .hero-cta, .btn-detail { 
       display: none !important; 
     }
 
-    /* 2. Ẩn tất cả các nút bấm hành động (CTA, Xem chi tiết...) */
-    button, .hero-cta, .btn-detail { 
-      display: none !important; 
+    /* 2. Chuyển các lưới Grid thành dạng dòng chảy tự nhiên để dễ ngắt trang */
+    .about-grid, .projects-grid, .reflect-grid, .principles-grid {
+      display: block !important;
+      page-break-inside: auto !important;
+      break-inside: auto !important;
     }
 
-    /* 3. Chống ngắt trang lỗi: Giữ tiêu đề và nội dung đi liền nhau, tránh để lại khoảng trắng uổng phí */
-    .about-grid, .projects-grid, .reflect-grid, .principles-grid, .summary-box {
-      page-break-inside: avoid;
-      break-inside: avoid;
+    /* 3. Cho phép nội dung bên trong được ngắt trang thoải mái */
+    .about-left, .about-right {
+      margin-bottom: 2rem;
+      page-break-inside: auto !important;
+      break-inside: auto !important;
     }
     
-    /* Không cho phép một thẻ bài tập nhỏ bị chặt đôi làm hai trang */
-    .project-card, .reflect-card, .principle-card {
-      page-break-inside: avoid;
-      break-inside: avoid;
+    /* 4. CHỈ giữ các thẻ con (bài tập nhỏ) không bị chặt đôi làm hai trang */
+    .project-card, .reflect-card, .principle-card, .summary-box {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+      margin-bottom: 15px;
     }
 
     /* Giữ tiêu đề lớn luôn đi kèm với nội dung phía sau nó */
     h2.section-title, .section-label {
-      page-break-after: avoid;
-      break-after: avoid;
+      page-break-after: avoid !important;
+      break-after: avoid !important;
     }
 
-    /* 4. Giữ nguyên màu sắc background, thanh tiến độ và hộp highlight khi xuất PDF */
+    /* 5. Giữ nguyên màu sắc background và thanh tiến độ */
     * { 
       -webkit-print-color-adjust: exact !important; 
       print-color-adjust: exact !important; 
